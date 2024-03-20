@@ -189,6 +189,51 @@ $(document).ready(function () {
       type: "fraction",
     }
   }) 
+    // 알람탭메뉴 기능
+    var alramA = $(".alram-tab-menu a");
+    var alramCont = $(".alram-tab-cont");
+    $.each(alramA, function (index, item) {
+      $(this).click(function (e) {
+        e.preventDefault();
+        alramCont.removeClass("alram-tab-cont-focus")
+        alramCont.eq(index).addClass("alram-tab-cont-focus")
+        alramA.removeClass("alram-tab-menu-focus")
+        alramA.eq(index).addClass("alram-tab-menu-focus")
+      });
+    });
+
+    // 알람탭메뉴 스와퍼
+    var sw_navi = new Swiper(".sw-navi" , {
+      loop: true,
+      slidesPerView: 3,
+      navigation: {
+        nextEl: ".sw-navi-next",
+        prevEl: ".sw-navi-prev",
+      },
+      centeredSlides: true,
+      loopedSlides:3,
+      slideToClickedSlide:true,
+    })
+    // 알람탭 했을때 content 연결
+    sw_content.controller.control = sw_navi
+    sw_navi.controller.control = sw_content
+
+
+    // hub영역
+    // 허브 메뉴
+    var hubMenu = $(".hub-menu a")
+    // 허브 내용들을 저장
+    var hubInfos = $(".hub-info > li")
+    // 모든 기능이 똑같다
+    $.each(hubMenu ,function(index,item){
+      // 마우스 오버를 처리
+      $(this).mouseenter(function(){
+        hubInfos.removeClass("hub-info-focus")
+        hubInfos.eq(index).addClass("hub-info-focus")
+      })
+    })
+
+
   // ======================
 });
 
