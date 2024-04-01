@@ -461,8 +461,6 @@
   font-size: 2.4rem;
   font-family: "NanumSquare";
   color: rgba(85, 85, 85, 0.5);
-  color: rgba(85, 85, 85, 0.5);
-
   font-weight: 500;
   letter-spacing: -0.5px;
   margin-right: 20px;
@@ -490,7 +488,7 @@
 .alram-tab-menu-focus {
   color: rgba(85, 85, 85, 1) !important;
 }
-.alram-tab-menu-focus::before {
+.alram-tab-menu-focus:before {
   opacity: 1 !important;
 }
 .alram-tab-cont {
@@ -584,7 +582,7 @@
   font-weight: 500;
 }
 /* 세번째 슬라이드 */
-.calender-wrap {
+.calendar-wrap {
   position: relative;
   display: block;
 }
@@ -666,10 +664,9 @@
   font-family: "NanumSquare";
   font-size: 1.7rem;
   font-weight: 500;
-
   color: #fff;
 }
-/* 컨텐츠 하단(navi) */
+/*  <!-- 컨텐츠히단 (navi) --> */
 .content-navi {
   position: relative;
   display: block;
@@ -697,23 +694,31 @@
   display: block;
   width: 80px;
   height: 80px;
+
   float: left;
-  font-size: 3.0rem;
+  font-size: 3rem;
   text-align: center;
   line-height: 80px;
+
   color: #fff;
+
   opacity: 0;
 }
+
 .content-tab-tit {
   position: relative;
   display: block;
+
   float: left;
+
   padding: 30px 25px;
+
   font-size: 1.9rem;
-  font-family: 'NanumSquare';
+  font-family: "NanumSquare";
   font-weight: 400;
   color: #333;
 }
+
 .sw-navi-prev {
   position: absolute;
   left: 0;
@@ -722,6 +727,7 @@
   width: 80px;
   height: 80px;
   background: #fff;
+
   text-align: center;
   line-height: 80px;
   font-size: 2.4rem;
@@ -731,6 +737,7 @@
   border: 1px solid #eaedf4;
   border-right: none;
 }
+
 .sw-navi-prev:hover {
   color: #ec008c;
 }
@@ -756,14 +763,15 @@
 .sw-navi-next:hover {
   color: #ec008c;
 }
-/* 현재 포커스가 된 슬라이드 */
-.sw-navi .swiper-slide-active .content-tab{
+/* 현재 포커스가 된 slide */
+.sw-navi .swiper-slide-active .content-tab {
   background-color: #ec008c;
 }
-.sw-navi .swiper-slide-active .content-tab .content-tab-img{
+.sw-navi .swiper-slide-active .content-tab .content-tab-img {
   display: none;
+
 }
-.sw-navi .swiper-slide-active .content-tab .content-tab-icon{
+.sw-navi .swiper-slide-active .content-tab .content-tab-icon {
   opacity: 1;
   background-color: #ec008c;
 }

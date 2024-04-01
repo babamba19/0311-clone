@@ -1,4 +1,38 @@
 $(document).ready(function () {
+  //우측 픽스 메뉴
+  var fixA = $(".fix-a");
+  $.each(fixA, function (index, item) {
+    $(this).click(function (e) {
+      // e.preventDefault();
+      fixA.removeClass("fix-a-focus");
+      fixA.eq(index).addClass("fix-a-focus");
+    });
+  });
+  // 스크롤시에 우측 고정메뉴를 포커스 처리
+  var hebPosY = $("#hub").offset().top - 66;
+  var snsPosY = $("#sns").offset().top - 66;
+  $(window).scroll(function () {
+    // 스클롤 바의 위치 파악 px값
+    var scY = $(window).scrollTop();
+    console.log(scY);
+    if (scY >= snsPosY) {
+      fixA.removeClass("fix-a-focus");
+      fixA.eq(2).addClass("fix-a-focus");
+    }else if(scY >= hebPosY){
+      fixA.removeClass("fix-a-focus");
+      fixA.eq(1).addClass("fix-a-focus");
+    }else{
+      fixA.removeClass("fix-a-focus");
+      fixA.eq(0).addClass("fix-a-focus");
+    }
+  });
+// gotop
+$(".gotop").click(function(e){
+  e.preventDefault();
+  $("html").stop().animate({
+    scrollTop: 0
+  }, 600);
+});
   //    gnb관련코드 //
   var gnb = $(".mainmenu");
   var dim = $(".header-dim");
@@ -88,12 +122,14 @@ $(document).ready(function () {
       $(".content").addClass("h-fix-mt");
       $(".logo-gnb").addClass("h-show");
       $(".gnb").addClass("h-fix-gnb");
+      $(".gotop").addClass("gotop_focus");
       // gotop기능 추가 예정
     } else {
       $(".header").removeClass("h-fix");
       $(".content").removeClass("h-fix-mt");
       $(".logo-gnb").removeClass("h-show");
       $(".gnb").removeClass("h-fix-gnb");
+      $(".gotop").removeClass("gotop_focus");
       // gotop기능 추가 예정
     }
   });
@@ -147,7 +183,6 @@ $(document).ready(function () {
   // 공지사항 목록 관련(사업공고 ,입찰공고,결과발표 )
   var noticeA = $(".notice-menu > li");
   $.each(noticeA, function (index, item) {
-    
     $(this)
       .find("a")
       .click(function (e) {
@@ -169,7 +204,7 @@ $(document).ready(function () {
     if (_index == 1) {
       return;
     }
-    noticeLi.eq(_index).show()
+    noticeLi.eq(_index).show();
   }
   var se_edu = new Swiper(".sw-edu", {
     autoplay: {
@@ -178,7 +213,8 @@ $(document).ready(function () {
       disableOnInteraction: false,
     },
     loop: true,
-    // 중첩된(swiper 내부에 다른 swiper가 있는) swiper 인스턴스에 대해 스와이프 동작이 가능
+    // 중첩된(swiper 내부에 다른 swiper가 있는)
+    // swiper 인스턴스에 대해 스와이프 동작이 가능
     nested: true,
     navigation: {
       nextEl: ".sw-edu-next",
@@ -187,53 +223,50 @@ $(document).ready(function () {
     pagination: {
       el: ".sw-edu-pg",
       type: "fraction",
-    }
-  }) 
-    // 알람탭메뉴 기능
-    var alramA = $(".alram-tab-menu a");
-    var alramCont = $(".alram-tab-cont");
-    $.each(alramA, function (index, item) {
-      $(this).click(function (e) {
-        e.preventDefault();
-        alramCont.removeClass("alram-tab-cont-focus")
-        alramCont.eq(index).addClass("alram-tab-cont-focus")
-        alramA.removeClass("alram-tab-menu-focus")
-        alramA.eq(index).addClass("alram-tab-menu-focus")
-      });
+    },
+  });
+  // 알람탭메뉴 기능
+  var alramA = $(".alram-tab-menu a");
+  var alramCont = $(".alram-tab-cont");
+  $.each(alramA, function (index, item) {
+    $(this).click(function (e) {
+      e.preventDefault();
+      alramCont.removeClass("alram-tab-cont-focus");
+      alramCont.eq(index).addClass("alram-tab-cont-focus");
+      alramA.removeClass("alram-tab-menu-focus");
+      alramA.eq(index).addClass("alram-tab-menu-focus");
     });
+  });
 
-    // 알람탭메뉴 스와퍼
-    var sw_navi = new Swiper(".sw-navi" , {
-      loop: true,
-      slidesPerView: 3,
-      navigation: {
-        nextEl: ".sw-navi-next",
-        prevEl: ".sw-navi-prev",
-      },
-      centeredSlides: true,
-      loopedSlides:3,
-      slideToClickedSlide:true,
-    })
-    // 알람탭 했을때 content 연결
-    sw_content.controller.control = sw_navi
-    sw_navi.controller.control = sw_content
+  // 알람탭메뉴 스와퍼
+  var sw_navi = new Swiper(".sw-navi", {
+    loop: true,
+    slidesPerView: 3,
+    navigation: {
+      nextEl: ".sw-navi-next",
+      prevEl: ".sw-navi-prev",
+    },
+    centeredSlides: true,
+    loopedSlides: 3,
+    slideToClickedSlide: true,
+  });
+  // 알람탭 했을때 content 연결
+  sw_content.controller.control = sw_navi;
+  sw_navi.controller.control = sw_content;
 
-
-    // hub영역
-    // 허브 메뉴
-    var hubMenu = $(".hub-menu a")
-    // 허브 내용들을 저장
-    var hubInfos = $(".hub-info > li")
-    // 모든 기능이 똑같다
-    $.each(hubMenu ,function(index,item){
-      // 마우스 오버를 처리
-      $(this).mouseenter(function(){
-        hubInfos.removeClass("hub-info-focus")
-        hubInfos.eq(index).addClass("hub-info-focus")
-      })
-    })
-
-
+  // hub 영역
+  // 허브 메뉴 저장
+  var hubMenu = $(".hub-menu a");
+  // 허브 내용들을 저장
+  var hubInfos = $(".hub-info > li");
+  // 모두 기능이 똑 같다
+  $.each(hubMenu, function (index, item) {
+    // 마우스 오버를 처리
+    $(this).mouseenter(function () {
+      hubInfos.removeClass("hub-info-focus");
+      hubInfos.eq(index).addClass("hub-info-focus");
+    });
+  });
   // ======================
 });
 
